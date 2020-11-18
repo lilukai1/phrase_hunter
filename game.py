@@ -28,7 +28,6 @@ class Game():
             self.active_phrase.display_phrase(self.guesses)
             guess = self.get_guess()
             incomplete = self.active_phrase.check_complete(self.guesses)
-            print(incomplete)
             if guess:
                 self.missed += guess
                 lives_left = 5 - self.missed
