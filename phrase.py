@@ -11,7 +11,7 @@ class Phrase():
         the_phrase = self.phrase
         for letter in the_phrase:
             if letter not in guesses:
-                the_phrase = the_phrase.replace(letter, "_")
+                the_phrase = the_phrase.replace(letter, "_ ")
         print(the_phrase)        
         return the_phrase
 

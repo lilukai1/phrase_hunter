@@ -1,5 +1,4 @@
 import random
-
 from phrase import Phrase
 
 
@@ -48,24 +47,25 @@ class Game():
 
     def get_random_phrase(self):
         choice = random.choice(self.phrases)
-        print(choice)
         return Phrase(choice)
 
 ## get_guess(): this method gets the guess from a user and records it in the guesses attribute
 
     def get_guess(self):
         try:
-            letter = input("What is your guess? Enter one letter >>  \n")
+            letter = input("\nWhat is your guess? Enter one letter >>  \n")
             letter = letter.lower()
             if letter in self.guesses:
                 print(f"You have already tried {letter}!")
             elif letter.isalpha() == False:
-                print(f"You must guess an alphabetic character, no spaces, punctuation or numbers.")
+                raise
+            elif len(letter) > 1:
+                raise
             else:
                 self.guesses.append(letter)
                 return(self.active_phrase.check_letter(letter))
         except:
-            print("Your guess must be a single letter.")
+            print(f"You must guess an alphabetic character, no spaces, punctuation or numbers.")
 ## game_over(): this method displays a friendly win or loss message and ends the game.
 
     def game_over(self):
@@ -79,9 +79,11 @@ class Game():
                 try_again = input("Would you like to try again? Y/N\n")
                 if try_again.lower() == "y":
                     new_game = Game().start()
-                else:
+                elif try_again.lower() == "n":
                     print("Thanks, have a great day!")
-                    quit()
+                    break
+                else:
+                    raise
             except:
                 print("I'm sorry, you have to enter y for yes or n for no.")
 
