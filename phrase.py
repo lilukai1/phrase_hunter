@@ -8,10 +8,14 @@ class Phrase():
         return f"{self.phrase}"
 
     def display_phrase(self, guesses):
-        the_phrase = self.phrase
-        for letter in the_phrase:
-            if letter not in guesses:
-                the_phrase = the_phrase.replace(letter, "_ ")
+        # the_phrase = self.phrase
+        the_phrase = ""
+        for letter in self.phrase:
+            if letter in guesses:
+                r_letter = f"{letter} "
+                the_phrase += f"{letter} "
+            elif letter not in guesses:
+                the_phrase += "_ "
         print(the_phrase)        
         return the_phrase
 
@@ -35,12 +39,12 @@ class Phrase():
 if __name__ == "__main__":
     
     guessing_phrase = input("What is the phrase to guess?")
-
+    guesses = ["a","b","c","d"]
     phrase = Phrase(guessing_phrase)
-    print(phrase.display_phrase(), phrase.alphabet, phrase.solved)
-
-    while phrase.solved == False:
-        phrase.check_letter()
-        # print(phrase.display_phrase(), phrase.alphabet, phrase.solved)
-        phrase.check_complete()
+    while True:
+        print(phrase.display_phrase(guesses))
+        guess = input("Whats your guess?")
+        guesses.append(guess)
+        phrase.check_letter(guess)
+        phrase.check_complete(guesses)
 

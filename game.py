@@ -30,8 +30,11 @@ class Game():
             incomplete = self.active_phrase.check_complete(self.guesses)
             if guess:
                 self.missed += guess
-                lives_left = 5 - self.missed
-                print(f"You have missed {self.missed} tries! You only have {lives_left} tries left.")
+                if self.missed == 5:
+                    print(f"Oh no! You missed {self.missed} tries! You are out of lives.")
+                else:
+                    lives_left = 5 - self.missed
+                    print(f"You have missed {self.missed} tries! You only have {lives_left} tries left.")
         self.game_over()
 ##welcome(): this method prints a friendly welcome message to the user at the start of the game
 
@@ -65,11 +68,12 @@ class Game():
                 return(self.active_phrase.check_letter(letter))
         except:
             print(f"You must guess an alphabetic character, no spaces, punctuation or numbers.")
-## game_over(): this method displays a friendly win or loss message and ends the game.
 
+
+## game_over(): this method displays a friendly win or loss message and ends the game.
     def game_over(self):
         if self.missed == 5:
-            print(f"You ran out of lives!  The answer was {self.active_phrase}.  Better luck next time!")
+            print(f"The answer was {self.active_phrase}.  Better luck next time!")
         else:
             print(f"Congrats, you won with only {self.missed} wrong guesses!")
     
